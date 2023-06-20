@@ -1,1 +1,2 @@
-# POO_Cinema
+# Exercice POO_Cinema
+### Modèle relationnel des données :
