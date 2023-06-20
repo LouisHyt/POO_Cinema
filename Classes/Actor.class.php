@@ -18,11 +18,6 @@ class Actor extends Person{
     }
 
     public function getMoviesList(): string{
-        usort($this->castings, function($a, $b){
-            $t1 =$a->getMovie()->getReleaseDate();
-            $t2 = $b->getMovie()->getReleaseDate();
-            return ($t1 < $t2) ? 1 : -1;
-        });
         $result = "Filmographie de <strong>$this</strong> (Acteur) :<ul>";
         foreach ($this->castings as $casting) {
             $result .= 

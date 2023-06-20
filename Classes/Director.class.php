@@ -18,11 +18,11 @@ class Director extends Person{
     }
 
     public function getMoviesList(): string{
-        SortArray::sort($this->movies);
+        $sorted = SortArray::sort($this->movies, false);
 
         //var_dump($this->movies);
         $result = "Fimographie de <strong>$this->surname $this->name</strong> (Réalisateur) :<ul>";
-        foreach ($this->movies as $movie) {
+        foreach ($sorted as $movie) {
             $result .= 
             "<li>
                 ". $movie->getTitle() . " (". $movie->getReleaseDate()->format("Y") .") ". DisplayNote::getNote($movie->getNote()) . "
