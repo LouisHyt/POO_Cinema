@@ -6,6 +6,7 @@ class Director extends Person{
 
     public function __construct($name, $surname, $sex, $birthDate){
         parent::__construct($name, $surname, $sex, $birthDate);
+        $this->movies = [];
     }
 
     public function getMovies():array {
@@ -14,6 +15,21 @@ class Director extends Person{
     public function addMovie(Movie $movie){
         $this->movies[] = $movie;
         $movie->setDirector($this);
+    }
+
+    public function getMoviesList(): string{
+        SortArray::sort($this->movies);
+
+        //var_dump($this->movies);
+        $result = "Fimographie de <strong>$this->surname $this->name</strong> (Réalisateur) :<ul>";
+        foreach ($this->movies as $movie) {
+            $result .= 
+            "<li>
+                ". $movie->getTitle() . " (". $movie->getReleaseDate()->format("Y") .") ". DisplayNote::getNote($movie->getNote()) . "
+            </li>";
+        }
+        $result .= "</ul>";
+        return $result;
     }
 
 }

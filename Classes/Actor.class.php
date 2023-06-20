@@ -2,10 +2,37 @@
 
 class Actor extends Person{
 
-    public function __construct($name, $surname, $sex, $birthDate){
+    private array $castings;
+
+    public function __construct(string $name, string $surname, string $sex, string $birthDate){
         parent::__construct($name, $surname, $sex, $birthDate);
+        $this->castings = [];
     }
 
+    public function setCastings(Casting $casting): void{
+        $this->castings[] = $casting;
+    }
+
+    public function getCastings(): Array{
+        return $this->castings;
+    }
+
+    public function getMoviesList(): string{
+        usort($this->castings, function($a, $b){
+            $t1 =$a->getMovie()->getReleaseDate();
+            $t2 = $b->getMovie()->getReleaseDate();
+            return ($t1 < $t2) ? 1 : -1;
+        });
+        $result = "Filmographie de <strong>$this</strong> (Acteur) :<ul>";
+        foreach ($this->castings as $casting) {
+            $result .= 
+            "<li>
+                ". $casting->getMovie() ." (" .$casting->getRole(). ") - ". $casting->getMovie()->getReleaseDate()->format("Y") ."
+            </li>";
+        }
+        $result .= "</ul>";
+        return $result;
+    }
 }
 
 ?>

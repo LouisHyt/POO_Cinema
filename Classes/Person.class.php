@@ -56,8 +56,13 @@ class Person {
         return "
             Informations sur le réalisateur $this->surname $this->name : <br />
             • Sexe : $this->sex <br />
-            • Date de naissance :". $this->birthDate ." <br />
+            • Date de naissance : ". $this->birthDate->format("d/m/Y") ." <br />
             • Age : ". $this->getAge();
+    }
+
+    public function __toString()
+    {
+        return $this->name." ".$this->surname;
     }
 }
 
